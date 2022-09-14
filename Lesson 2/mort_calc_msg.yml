@@ -1,0 +1,8 @@
+welcome: "************ WELCOME TO ANGELA'S MORTGAGE/CAR LOAN CALCULATOR! ************"
+loan_amnt: "What is your loan amount?"
+invalid_loan_amnt: "Not a valid loan amount. Give loan amount > 0."
+interest: "What is your interest rate (in percentages)?"
+invalid_interest: "Not a valid interest rate. Give a percentage."
+duration: "What is the loan duration (in years)?"
+invalid_duration: "Not a valid loan duration."
+again: "Do another calculation? (y/n)"

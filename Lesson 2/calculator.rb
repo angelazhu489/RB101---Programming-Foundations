@@ -22,7 +22,7 @@ end
 
 # Message style
 def prompt(message)
-	# message = messages(key, LANGUAGE)
+	# message = messages(key, LANGUAGE) # key as variable
 	puts "=> #{message}"
 end
 
