@@ -10,13 +10,25 @@
 # includes the newline, so you have to call chomp() to remove it: 
 # Kernel.gets().chomp().
 
+# Yaml file for messages
+require 'yaml'
+MESSAGES = YAML.load_file('calc_messages.yml')
+LANGUAGE = 'en'
+
+# Get messages of chosen language
+def messages(message, lang='en')
+  MESSAGES[lang][message]
+end
+
+# Message style
 def prompt(message)
+	# message = messages(key, LANGUAGE)
 	puts "=> #{message}"
 end
 
-# Check if input is number and not 0
-def valid_number?(num)
-	num != 0 && num.is_a?(Integer)
+# Check if input is number or float
+def valid_number?(input)
+	input.to_i.to_s == input || input.to_f.to_s == input
 end
 
 # Check if op 1-4 or a, s, m, d
@@ -37,8 +49,9 @@ def get_op(op)
 	end
 end
 
+# Convert operation to message
 def op_to_msg(op)
-	case op
+	word = case op
 	when 1
 		"Adding"
 	when 2
@@ -48,9 +61,10 @@ def op_to_msg(op)
 	when
 		"Dividing"
 	end
+	word
 end
 
-prompt("Welcome to Angela's Calculator! Enter your name: ")
+prompt(messages('welcome', LANGUAGE))
 
 # Get name of user
 name = nil
@@ -58,7 +72,7 @@ name = nil
 loop do
 	name = gets.chomp
 	break unless name.empty?
-	prompt("Please give a valid name.")
+	prompt(messages('valid_name', LANGUAGE))
 end
 prompt("Hello #{name.capitalize}!")
 
@@ -69,19 +83,21 @@ loop do
 	first = nil
 	loop do
 		prompt("Give a number: ")
-		first = gets.chomp.to_i
+		first = gets.chomp
 		break if valid_number?(first)
 		prompt("Not a valid number.")
 	end
+	first = first.to_f
 
 	# Get second number
 	second = nil
 	loop do
 		prompt("Give another number: ")
-		second = gets.chomp.to_i
+		second = gets.chomp
 		break if valid_number?(second)
 		prompt("Not a valid number.")
 	end
+	second = second.to_f
 
 	# Get operation
 	op = nil
@@ -114,6 +130,7 @@ loop do
 		end
 	end
 
+	# Print result
 	op = get_op(op)
 	result = compute(first, second, op).to_s
 	prompt("#{op_to_msg(op)} #{first} and #{second}...")

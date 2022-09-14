@@ -1,0 +1,6 @@
+en:
+  welcome: "Welcome to Angela's Calculator! Enter your name:"
+  valid_name: "Please give a valid name."
+es:
+  welcome: "Bienvenido a la calculadora! Entre su nombre:"
+  valid_name: "Asegúrese de entrar un nombre válido."
