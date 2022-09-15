@@ -4,7 +4,7 @@
 # - the computer makes a choice
 # - the winner is displayed
 
-VALID_CHOICES = ['rock', 'paper', 'scissors']
+VALID_CHOICES = %w(rock paper scissors)
 
 
 # def test_method
@@ -16,15 +16,18 @@ def prompt(msg)
 	puts "==> #{msg}"
 end
 
+# Win conditions
+def win?(first, second)
+	(first == 'rock' && second == 'scissors' || 
+		first == 'paper' && second == 'rock' || 
+		first == 'scissors' && second == 'paper')
+	end
+
 # Print result of game
 def display_result(player, computer)
-	if (player == 'rock' && computer == 'scissors' || 
-		player == 'paper' && computer == 'rock' || 
-		player == 'scissors' && computer == 'paper')
+	if win?(player, computer)
 		prompt("You won!")
-	elsif (player == 'rock' && computer == 'paper' || 
-		player == 'paper' && computer == 'scissors' || 
-		player == 'scissors' && computer == 'rock')
+	elsif win?(computer, player)
 		prompt("You lost.")
 	else 
 		prompt("It's a tie")
